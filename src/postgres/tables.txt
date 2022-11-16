@@ -1,0 +1,51 @@
+USERS
+---------------------------------------------
+create table users (
+ id varchar(255) not null,
+ username varchar(255) not null,
+ createdAt date not null default current_date,
+ primary key (id)
+);
+
+PROBLEMS 
+---------------------------------------------
+create table problems (
+    id int not null,
+    name varchar(255),
+    description varchar(255),
+    primary key (id)
+);
+
+SUBMISSIONS
+---------------------------------------------
+create table submissions (
+    id uuid not null default uuid_generate_v1(),
+    problemID int,
+    userID varchar(255),
+    code varchar(255),
+    success boolean,
+    executionTime int,
+    bytes int,
+    constraint fk_problems
+        foreign key(problemID)
+            references problems(id)
+            on delete set null,
+    constraint fk_users
+        foreign key(userID)
+            references users(id)
+            on delete set null
+
+);
+
+TESTCASES
+---------------------------------------------
+create table testcases (
+    id uuid not null default uuid_generate_v1(),
+    problemID int,
+    input varchar(255),
+    expected varchar(255)
+    constraint fk_problems
+        foreign key(problemID)
+            references problems(id)
+            on delete set null
+);
