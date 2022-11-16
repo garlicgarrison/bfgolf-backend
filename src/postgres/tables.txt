@@ -26,14 +26,15 @@ create table submissions (
     success boolean,
     executionTime int,
     bytes int,
+    createdAt date not null default current_date,
     constraint fk_problems
         foreign key(problemID)
             references problems(id)
-            on delete set null,
+            on delete cascade,
     constraint fk_users
         foreign key(userID)
             references users(id)
-            on delete set null
+            on delete cascade
 
 );
 
@@ -43,9 +44,9 @@ create table testcases (
     id uuid not null default uuid_generate_v1(),
     problemID int,
     input varchar(255),
-    expected varchar(255)
+    expected varchar(255),
     constraint fk_problems
         foreign key(problemID)
             references problems(id)
-            on delete set null
+            on delete cascade
 );
