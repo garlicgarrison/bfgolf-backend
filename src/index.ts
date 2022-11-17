@@ -2,6 +2,7 @@ import express from "express";
 import context from "express-http-context";
 import { authMiddleware } from "./middleware/auth";
 import { errorMiddleware } from "./middleware/error";
+import { Pool } from "node-postgres";
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,6 +16,9 @@ app.get("/ping", (_, res) => {
 // pre-middleware
 app.use(context.middleware);
 app.use(authMiddleware);
+
+// routes
+// app.get("/user/:id");
 
 // error-middleware
 app.use(errorMiddleware);

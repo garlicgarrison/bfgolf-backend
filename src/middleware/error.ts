@@ -1,5 +1,4 @@
 import express from "express";
-import { nextTick } from "process";
 
 export const errorMiddleware: express.ErrorRequestHandler = (
   err,
